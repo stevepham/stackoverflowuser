@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_user">120dp</dimen>
+    <dimen name="avatar">120dp</dimen>
+    <dimen name="view_padding">8dp</dimen>
+    <dimen name="card_info">90dp</dimen>
+    <dimen name="view_margin">8dp</dimen>
+    <dimen name="heart">32dp</dimen>
+</resources>

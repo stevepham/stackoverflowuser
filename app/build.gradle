@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.ht117.sofossill"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField "String", 'BASE_URL', '"https://api.stackexchange.com/"'
+        buildConfigField "String", 'API_VERSION', '"2.2"'
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation androidx.appcompat
+    implementation androidx.core_ktx
+    implementation androidx.constraint
+    implementation androidx.nav_fragment
+    implementation androidx.nav_ui_ktx
+    implementation androidx.cardview
+    implementation androidx.recycler
+    implementation androidx.paging
+    implementation androidx.room_runtime
+    kapt androidx.room_compiler
+    implementation androidx.room_ktx
+
+    implementation library.retrofit
+    implementation library.moshi
+    implementation library.moshi_converter
+    implementation library.http_logger
+    implementation library.coroutine
+    implementation library.koin
+    implementation library.moshi_kotlin
+    implementation library.coroutine_adapter
+    implementation library.glide
+    kapt library.glide_compiler
+
+    testImplementation test.junit// 'junit:junit:4.12'
+    androidTestImplementation test.android_junit//'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation test.espresso//'androidx.test.espresso:espresso-core:3.2.0'
+}

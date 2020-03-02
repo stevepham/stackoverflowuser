@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:minHeight="@dimen/card_info"
+    android:layout_margin="@dimen/view_padding"
+    app:cardCornerRadius="@dimen/cardview_default_radius"
+    app:cardElevation="@dimen/cardview_default_elevation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvType"
+            style="@style/RepuValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Post_upvote"/>
+
+        <TextView
+            android:id="@+id/tvChange"
+            style="@style/RepuValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="10"/>
+
+        <TextView
+            android:id="@+id/tvCreateAt"
+            style="@style/RepuValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="02/03/2020"/>
+
+        <TextView
+            android:id="@+id/tvPostId"
+            style="@style/RepuValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="20202"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
