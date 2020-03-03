@@ -17,6 +17,7 @@ Support save offline for user
 - Coroutine
 - Navigation
 - Paging + BoundaryCallback
+- Room
 
 ## Demo 
 ![](so.gif)
