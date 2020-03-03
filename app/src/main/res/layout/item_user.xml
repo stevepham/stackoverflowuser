@@ -71,7 +71,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginEnd="@dimen/view_margin"
             android:layout_marginBottom="@dimen/view_margin"
-            android:src="@android:drawable/ic_media_play"/>
+            android:src="@drawable/ic_favorite"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

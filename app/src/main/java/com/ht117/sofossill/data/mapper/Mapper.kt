@@ -15,6 +15,14 @@ object Mapper {
             isBookmarked = entity.isBookmarked)
     }
 
+    fun userEntitiesToModels(entities: List<UserEntity>): List<UserModel> {
+        val result = mutableListOf<UserModel>()
+        entities.forEach {
+            result.add(userEntityToModel(it))
+        }
+        return result
+    }
+
     fun userModelToEntity(model: UserModel): UserEntity {
         return UserEntity(userId = model.userId,
             displayName = model.displayName,
@@ -23,5 +31,13 @@ object Mapper {
             location = model.location,
             lastAccessDate = model.lastAccessDate,
             isBookmarked = model.isBookmarked)
+    }
+
+    fun userModelsToEntities(models: List<UserModel>): List<UserEntity> {
+        val result = mutableListOf<UserEntity>()
+        models.forEach {
+            result.add(userModelToEntity(it))
+        }
+        return result
     }
 }

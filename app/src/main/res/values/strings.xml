@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">SOFossil</string>
     <string name="unknown">Unknown</string>
+    <string name="txt_failed_to_load_user">Failed to load user stack overflow!!!</string>
+    <string name="repu_type">Reputation Type:</string>
+    <string name="repu_change">Change:</string>
+    <string name="repu_create">Created at:</string>
+    <string name="repu_post_id">Post Id:</string>
+    <string name="all">All</string>
+    <string name="bookmarked">Marked</string>
 </resources>

@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.ht117.sofossill.R
 import com.ht117.sofossill.app.displayTime
 import com.ht117.sofossill.app.formatNumber
@@ -14,7 +13,8 @@ import com.ht117.sofossill.app.loadAvatar
 import com.ht117.sofossill.data.model.UserModel
 import kotlinx.android.synthetic.main.item_user.view.*
 
-class UserAdapter(private val callback: ((UserModel) -> Unit)? = null):
+class UserAdapter(private val callback: ((UserModel) -> Unit)? = null,
+                  private val bookmarkCallback: ((Long, Boolean) -> Unit)? = null):
     PagedListAdapter<UserModel, UserAdapter.UserHolder>(UserDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHolder {
@@ -36,6 +36,11 @@ class UserAdapter(private val callback: ((UserModel) -> Unit)? = null):
                 itemView.tvLastAccess.text = lastAccessDate?.displayTime()
                 itemView.tvLocation.text = location?: itemView.context.getString(R.string.unknown)
                 itemView.ivAvatar.loadAvatar(profileImage)
+                itemView.ivBookmarked.isSelected = isBookmarked
+                itemView.ivBookmarked.setOnClickListener {
+                    itemView.ivBookmarked.isSelected = !itemView.ivBookmarked.isSelected
+                    bookmarkCallback?.invoke(userId, itemView.ivBookmarked.isSelected)
+                }
                 itemView.setOnClickListener {
                     callback?.invoke(this)
                 }

@@ -9,39 +9,91 @@
     app:cardCornerRadius="@dimen/cardview_default_radius"
     app:cardElevation="@dimen/cardview_default_elevation">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tvTitleType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/RepuTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="@string/repu_type"/>
+
+        <TextView
             android:id="@+id/tvType"
             style="@style/RepuValue"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvTitleType"
             tools:text="Post_upvote"/>
+
+        <TextView
+            android:id="@+id/tvTitleChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/RepuTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleType"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="@string/repu_change"/>
 
         <TextView
             android:id="@+id/tvChange"
             style="@style/RepuValue"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleType"
             tools:text="10"/>
+
+        <TextView
+            android:id="@+id/tvTitleCreateAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/RepuTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleChange"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="@string/repu_create"/>
 
         <TextView
             android:id="@+id/tvCreateAt"
             style="@style/RepuValue"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleChange"
             tools:text="02/03/2020"/>
+
+        <TextView
+            android:id="@+id/tvTitlePostId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/RepuTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleCreateAt"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="@string/repu_post_id"/>
 
         <TextView
             android:id="@+id/tvPostId"
             style="@style/RepuValue"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleCreateAt"
             tools:text="20202"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

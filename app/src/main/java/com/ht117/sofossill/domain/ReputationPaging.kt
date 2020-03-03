@@ -1,5 +1,6 @@
 package com.ht117.sofossill.domain
 
+import android.util.Log
 import androidx.paging.PageKeyedDataSource
 import com.ht117.sofossill.data.model.ReputationModel
 import kotlinx.coroutines.CoroutineScope
@@ -13,11 +14,13 @@ class ReputationPaging(private val initParam: GetReputationParam,
         callback: LoadInitialCallback<GetReputationParam, ReputationModel>
     ) {
         scope.launch {
-            val result = getRepu.invoke(initParam)
-            if (result.items.isNotEmpty() && result.hasMore) {
-                val before = initParam.copy(page = initParam.page -1)
+            try {
+                val result = getRepu.invoke(initParam)
+                val before = initParam.copy(page = initParam.page - 1)
                 val after = initParam.copy(page = initParam.page + 1)
-                callback.onResult(result.items, before, after)
+                callback.onResult(result, before, after)
+            } catch (exp: Exception) {
+                Log.d("Debug", "Failed to get reputation ${exp.message}")
             }
         }
     }
@@ -27,9 +30,11 @@ class ReputationPaging(private val initParam: GetReputationParam,
         callback: LoadCallback<GetReputationParam, ReputationModel>
     ) {
         scope.launch {
-            val result = getRepu.invoke(params.key)
-            if (result.items.isNotEmpty() && result.hasMore) {
-                callback.onResult(result.items, params.key.copy(page = params.key.page + 1))
+            try {
+                val result = getRepu.invoke(params.key)
+                callback.onResult(result, params.key.copy(page = params.key.page + 1))
+            } catch (exp: Exception) {
+                Log.d("Debug", "Failed to load after ${exp.message}")
             }
         }
     }

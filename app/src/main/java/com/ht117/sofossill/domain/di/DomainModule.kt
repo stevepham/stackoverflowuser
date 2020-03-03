@@ -2,7 +2,6 @@ package com.ht117.sofossill.domain.di
 
 import com.ht117.sofossill.data.di.DataModule.getDataModules
 import com.ht117.sofossill.domain.GetReputations
-import com.ht117.sofossill.domain.GetUsers
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -15,7 +14,6 @@ object DomainModule {
     }
 
     private val domainModule = module {
-        single { GetUsers(get()) }
         single { GetReputations(get()) }
     }
 }

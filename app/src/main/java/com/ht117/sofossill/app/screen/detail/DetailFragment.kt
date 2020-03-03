@@ -6,6 +6,7 @@ import com.ht117.sofossill.R
 import com.ht117.sofossill.app.Constants
 import com.ht117.sofossill.app.adapter.ReputationAdapter
 import com.ht117.sofossill.app.base.BaseFragment
+import com.ht117.sofossill.app.showError
 import com.ht117.sofossill.data.model.ReputationModel
 import com.ht117.sofossill.data.model.UserModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,5 +40,9 @@ class DetailFragment: BaseFragment() {
 
     private val reputationObserver = Observer<PagedList<ReputationModel>> {
         adapter.submitList(it)
+    }
+
+    private val stateObserver = Observer<Int> {
+        tvMessage.showError(it)
     }
 }

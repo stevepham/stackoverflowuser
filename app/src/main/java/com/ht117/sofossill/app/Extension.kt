@@ -1,6 +1,9 @@
 package com.ht117.sofossill.app
 
+import android.graphics.Color
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.ht117.sofossill.R
@@ -31,4 +34,26 @@ fun ImageView.loadAvatar(url: String?) {
         .placeholder(loader)
         .error(R.mipmap.ic_launcher_round)
         .into(this)
+}
+
+fun View.showView() {
+    visibility = View.VISIBLE
+}
+
+fun View.hideView() {
+    visibility = View.GONE
+}
+
+fun TextView.showInfo(messageId: Int) {
+    showView()
+    setText(messageId)
+    setTextColor(Color.BLUE)
+}
+
+fun TextView.showError(messageId: Int) {
+    if (messageId != 0) {
+        showView()
+        setText(messageId)
+        setTextColor(Color.RED)
+    }
 }

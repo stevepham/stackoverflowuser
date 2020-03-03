@@ -15,6 +15,8 @@ import com.ht117.sofossill.domain.ReputationPaging
 class DetailViewModel(private val getReputation: GetReputations): BaseViewModel() {
 
     var reputations: LiveData<PagedList<ReputationModel>> = MutableLiveData()
+    var uiState = MutableLiveData<String>()
+
     private val config = PagedList.Config.Builder()
         .setPageSize(Constants.PAGE_SIZE)
         .setEnablePlaceholders(false)
