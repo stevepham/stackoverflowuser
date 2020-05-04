@@ -18,13 +18,13 @@ class HomeViewModel(private val userRepo: IUserRepository): BaseViewModel() {
     var users: LiveData<PagedList<UserModel>> = MutableLiveData()
 
     fun getUsers() {
-        users = LivePagedListBuilder<Int, UserModel>(allUsersSource, config)
+        users = LivePagedListBuilder(allUsersSource, config)
             .setBoundaryCallback(boundary)
             .build()
     }
 
     fun getBookmarkedUsers() {
-        users = LivePagedListBuilder<Int, UserModel>(bookmarkedUsersSource, config)
+        users = LivePagedListBuilder(bookmarkedUsersSource, config)
             .build()
     }
 

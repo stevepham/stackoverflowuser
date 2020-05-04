@@ -14,7 +14,7 @@ import com.ht117.sofossill.data.model.UserModel
 import kotlinx.android.synthetic.main.item_user.view.*
 
 class UserAdapter(private val callback: ((UserModel) -> Unit)? = null,
-                  private val bookmarkCallback: ((Long, Boolean) -> Unit)? = null):
+                  private var bookmarkCallback: ((Long, Boolean) -> Unit)? = null):
     PagedListAdapter<UserModel, UserAdapter.UserHolder>(UserDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHolder {

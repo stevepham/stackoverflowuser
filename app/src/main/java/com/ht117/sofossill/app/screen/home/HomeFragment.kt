@@ -16,18 +16,17 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment: BaseFragment() {
 
     override var layoutId = R.layout.fragment_home
-    private val adapter = UserAdapter({ user ->
-        navigateTo(R.id.action_move_to_detail, bundleOf(Constants.USER to user))
-    }, { userId, isBookmarked ->
-        viewModel.markedUser(userId, isBookmarked)
-    })
 
     private val viewModel: HomeViewModel by viewModel()
 
     override fun initView() {
         super.initView()
         requireActivity().toolbar.setTitle(R.string.app_name)
-        rvUser.adapter = adapter
+        rvUser.adapter = UserAdapter({ user ->
+            navigateTo(R.id.action_move_to_detail, bundleOf(Constants.USER to user))
+        }, { userId, isBookmarked ->
+            viewModel.markedUser(userId, isBookmarked)
+        })
     }
 
     override fun initEvent() {
@@ -58,6 +57,7 @@ class HomeFragment: BaseFragment() {
     }
 
     private val userObserver = Observer<PagedList<UserModel>> {
+        val adapter = rvUser.adapter as UserAdapter
         adapter.submitList(it)
     }
 

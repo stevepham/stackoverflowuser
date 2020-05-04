@@ -61,7 +61,9 @@ dependencies {
     implementation library.glide
     kapt library.glide_compiler
 
-    testImplementation test.junit// 'junit:junit:4.12'
-    androidTestImplementation test.android_junit//'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation test.espresso//'androidx.test.espresso:espresso-core:3.2.0'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
+
+    testImplementation test.junit
+    androidTestImplementation test.android_junit
+    androidTestImplementation test.espresso
 }
