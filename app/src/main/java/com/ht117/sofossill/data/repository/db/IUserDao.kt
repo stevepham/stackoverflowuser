@@ -16,6 +16,9 @@ interface IUserDao {
     @Query("SELECT * from UserEntity ORDER BY reputation DESC LIMIT :pageSize OFFSET :offset")
     fun getAllUserInPage(pageSize: Int, offset: Int): List<UserEntity>
 
+    @Query("select * from userentity limit :pageSize offset :offset")
+    fun getUsersByPage(pageSize: Int, offset: Int): List<UserEntity>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(users: List<UserEntity>)
 

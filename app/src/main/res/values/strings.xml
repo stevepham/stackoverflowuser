@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SOFossil</string>
+    <string name="app_name">SO</string>
     <string name="unknown">Unknown</string>
     <string name="txt_failed_to_load_user">Failed to load user stack overflow!!!</string>
     <string name="repu_type">Reputation Type:</string>

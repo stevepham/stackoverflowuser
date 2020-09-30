@@ -8,7 +8,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.ht117.sofossill"
+        applicationId "com.ht117.so"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -49,6 +49,8 @@ dependencies {
     implementation androidx.room_runtime
     kapt androidx.room_compiler
     implementation androidx.room_ktx
+    implementation androidx.swiper
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
 
     implementation library.retrofit
     implementation library.moshi
@@ -61,7 +63,7 @@ dependencies {
     implementation library.glide
     kapt library.glide_compiler
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
+    debugImplementation library.leak_canary
 
     testImplementation test.junit
     androidTestImplementation test.android_junit

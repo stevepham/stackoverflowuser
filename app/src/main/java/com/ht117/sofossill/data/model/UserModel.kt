@@ -15,12 +15,11 @@ data class UserModel(@Json(name = "user_id") val userId: Long,
         parcel.readLong(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readValue(Long::class.java.classLoader) as? Long,
+        parcel.readValue(Long.javaClass.classLoader) as? Long,
         parcel.readString(),
-        parcel.readValue(Long::class.java.classLoader) as? Long,
+        parcel.readValue(Long.javaClass.classLoader) as? Long,
         parcel.readByte() != 0.toByte()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(userId)

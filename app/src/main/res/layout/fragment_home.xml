@@ -1,64 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvAll"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="@id/switchMode"
-        app:layout_constraintBottom_toBottomOf="@id/switchMode"
-        app:layout_constraintEnd_toStartOf="@id/switchMode"
-        android:layout_marginEnd="@dimen/view_margin"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:text="@string/all"/>
+<!--    <TextView-->
+<!--        android:id="@+id/tvAll"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginEnd="@dimen/view_margin"-->
+<!--        android:gravity="center"-->
+<!--        android:text="@string/all"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/switchMode"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/switchMode"-->
+<!--        app:layout_constraintTop_toTopOf="@id/switchMode" />-->
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchMode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/view_margin"
-        android:layout_marginEnd="@dimen/view_margin"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tvBookmarked"/>
+<!--    <androidx.appcompat.widget.SwitchCompat-->
+<!--        android:id="@+id/switchMode"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/view_margin"-->
+<!--        android:layout_marginEnd="@dimen/view_margin"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/tvBookmarked"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <TextView
-        android:id="@+id/tvBookmarked"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:textStyle="bold"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/switchMode"
-        app:layout_constraintBottom_toBottomOf="@id/switchMode"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/bookmarked"/>
+<!--    <TextView-->
+<!--        android:id="@+id/tvBookmarked"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:gravity="center"-->
+<!--        android:text="@string/bookmarked"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/switchMode"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@id/switchMode" />-->
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvUser"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/switchMode"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
-        tools:listitem="@layout/item_user"
-        tools:itemCount="10" />
-
-    <TextView
-        android:id="@+id/tvMessage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/TextMessage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:text="Acb"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_user" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

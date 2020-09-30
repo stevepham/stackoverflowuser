@@ -2,33 +2,44 @@ package com.ht117.sofossill.app.screen.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.paging.DataSource
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
-import com.ht117.sofossill.app.Constants
+import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.ht117.sofossill.app.base.BaseViewModel
-import com.ht117.sofossill.data.model.ReputationModel
-import com.ht117.sofossill.domain.GetReputationParam
+import com.ht117.sofossill.app.base.IModel
 import com.ht117.sofossill.domain.GetReputations
-import com.ht117.sofossill.domain.ReputationPaging
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.launch
 
-class DetailViewModel(private val getReputation: GetReputations): BaseViewModel() {
+class DetailViewModel(private val getReputation: GetReputations)
+    : BaseViewModel(), IModel<DetailState, DetailAction> {
 
-    var reputations: LiveData<PagedList<ReputationModel>> = MutableLiveData()
-    var uiState = MutableLiveData<String>()
+    override val actions: Channel<DetailAction> = Channel(Channel.UNLIMITED)
+    private val _state = MutableLiveData<DetailState>().apply { value = DetailState.InitState }
+    override val state: LiveData<DetailState>
+        get() = _state
 
-    private val config = PagedList.Config.Builder()
-        .setPageSize(Constants.PAGE_SIZE)
-        .setEnablePlaceholders(false)
-        .build()
+    init {
+        handleActions()
+    }
 
-    fun loadReputation(userId: Long) {
-        val param = GetReputationParam(userId.toString(), 1, Constants.PAGE_SIZE)
-        val dataSource = object: DataSource.Factory<GetReputationParam, ReputationModel>() {
-            override fun create(): DataSource<GetReputationParam, ReputationModel> {
-                return ReputationPaging(param, getReputation, ioScope)
+    private fun handleActions() = viewModelScope.launch {
+        actions.consumeAsFlow().collect {
+            when (it) {
+                is DetailAction.LoadReputation -> {
+                    loadReputation(it.userId)
+                }
             }
         }
-        reputations = LivePagedListBuilder<GetReputationParam, ReputationModel>(dataSource, config).build()
     }
+
+    private fun loadReputation(userId: Long) = viewModelScope.launch {
+        getReputation.invoke("$userId")
+            .cachedIn(viewModelScope)
+            .collect {
+                _state.value = DetailState.ShowReputation(it)
+            }
+    }
+
 }

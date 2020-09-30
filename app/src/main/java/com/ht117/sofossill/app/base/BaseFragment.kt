@@ -7,17 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
-abstract class BaseFragment: Fragment() {
-
-    abstract var layoutId: Int
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(layoutId, container, false)
-    }
+abstract class BaseFragment(layoutId: Int): Fragment(layoutId) {
 
     override fun onResume() {
         super.onResume()
@@ -26,15 +16,15 @@ abstract class BaseFragment: Fragment() {
         initEvent()
     }
 
-    override fun onPause() {
-        super.onPause()
-        clearObserver()
+    override fun onStop() {
+        cleanUp()
+        super.onStop()
     }
 
     open fun initView() {}
     open fun initEvent() {}
     open fun initLogic() {}
-    open fun clearObserver() {}
+    open fun cleanUp() {}
 
     fun navigateTo(destination: Int, params: Bundle = Bundle.EMPTY) {
         findNavController()

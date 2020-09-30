@@ -2,78 +2,45 @@ package com.ht117.sofossill.app.screen.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.paging.DataSource
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
-import com.ht117.sofossill.R
-import com.ht117.sofossill.app.Constants
+import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.ht117.sofossill.app.base.BaseViewModel
-import com.ht117.sofossill.data.model.UserModel
-import com.ht117.sofossill.data.repository.IUserRepository
+import com.ht117.sofossill.app.base.IModel
+import com.ht117.sofossill.domain.GetAllUsers
+import com.ht117.sofossill.domain.GetMarkedUser
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val userRepo: IUserRepository): BaseViewModel() {
+class HomeViewModel(private val getAllUsers: GetAllUsers)
+    : BaseViewModel(), IModel<HomeState, HomeAction> {
 
-    var uiState = MutableLiveData<Int>()
-    var users: LiveData<PagedList<UserModel>> = MutableLiveData()
+    override val actions: Channel<HomeAction> = Channel(Channel.UNLIMITED)
+    private val _state = MutableLiveData<HomeState>().apply {
+        value = HomeState.InitState
+    }
+    override val state: LiveData<HomeState> get() = _state
 
-    fun getUsers() {
-        users = LivePagedListBuilder(allUsersSource, config)
-            .setBoundaryCallback(boundary)
-            .build()
+    init {
+        handleActions()
     }
 
-    fun getBookmarkedUsers() {
-        users = LivePagedListBuilder(bookmarkedUsersSource, config)
-            .build()
-    }
-
-    fun markedUser(userId: Long, isBookmarked: Boolean) {
-        ioScope.launch {
-            userRepo.markedUser(userId, isBookmarked)
-        }
-    }
-
-    private val config = PagedList.Config.Builder()
-        .setPageSize(Constants.PAGE_SIZE)
-        .setEnablePlaceholders(false)
-        .build()
-
-    private val allUsersSource = object: DataSource.Factory<Int, UserModel>() {
-        override fun create(): DataSource<Int, UserModel> {
-            return userRepo.getUsersSource().create()
-        }
-    }
-
-    private val bookmarkedUsersSource = object: DataSource.Factory<Int, UserModel>() {
-        override fun create(): DataSource<Int, UserModel> {
-            return userRepo.getBookmarkedUser().create()
-        }
-    }
-
-    private val boundary = object: PagedList.BoundaryCallback<UserModel>() {
-        private var prevPage = 1
-        private var isCallingRequest = false
-
-        override fun onZeroItemsLoaded() {
-            loadUsers()
-        }
-
-        override fun onItemAtEndLoaded(itemAtEnd: UserModel) {
-            loadUsers()
-        }
-
-        private fun loadUsers() {
-            if (isCallingRequest) return
-            isCallingRequest = true
-            ioScope.launch {
-                try {
-                    userRepo.getUsersFromApiAndCache(prevPage++)
-                } catch (exp: Exception) {
-                    uiState.postValue(R.string.txt_failed_to_load_user)
+    private fun handleActions() = viewModelScope.launch {
+        actions.consumeAsFlow().collect {
+            when (it) {
+                else -> {
+                    handleGetAllUsers()
                 }
             }
-            isCallingRequest = false
         }
+    }
+
+    private suspend fun handleGetAllUsers() {
+        getAllUsers.invoke()
+            .cachedIn(this.viewModelScope)
+            .collect {
+                _state.value = HomeState.DataLoadedState(users = it)
+            }
     }
 }

@@ -46,7 +46,7 @@ fun provideRetrofit(networkLogger: Interceptor, headerInterceptor: Interceptor):
         .build()
 
     val client = OkHttpClient.Builder()
-        .addNetworkInterceptor(networkLogger)
+        .addInterceptor(networkLogger)
         .addInterceptor(headerInterceptor)
         .build()
 

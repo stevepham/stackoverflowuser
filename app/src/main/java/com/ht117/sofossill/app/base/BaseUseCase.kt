@@ -8,3 +8,11 @@ abstract class BaseUseCase<Param, Result> {
         return execute(param)
     }
 }
+
+abstract class BaseUseCaseNoParam<Result> {
+    abstract suspend fun execute(): Result
+
+    suspend operator fun invoke(): Result {
+        return execute()
+    }
+}
